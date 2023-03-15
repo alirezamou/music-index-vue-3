@@ -58,6 +58,13 @@ export default {
         totalPages() {
             return Math.ceil(this.songs.length / this.pageSize);
         }
+    },
+    watch: {
+        items: {
+            handler() {
+                this.currentPage = 0;
+            }
+        }
     }
 }
 </script>
