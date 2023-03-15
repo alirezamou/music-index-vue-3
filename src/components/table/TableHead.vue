@@ -3,7 +3,7 @@
         <tr>
             <template v-for="(value, index) in keys" :key="index">
                 <th>
-                    <a @click="changeSort(value)" :class="value === sortBy && 'active'">
+                    <a @click="() => $emit('changeSort', value)" :class="value === sortBy && 'active'">
                         {{ value }}
                         <font-awesome-icon
                           v-if="value === sortBy"
@@ -37,9 +37,6 @@ export default {
         },
     },
     methods: {
-        changeSort(column) {
-            this.$emit("changeSort", column)
-        },
         getIconName(column) {
             if(column === this.sortBy)
               if(this.sortDir === "asc")
