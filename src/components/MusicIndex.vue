@@ -1,24 +1,33 @@
 <template>
-    <div>
-        <TableVue 
-          :items="paginatedSongs"
-          :columns="columns"
-          :sortBy="sortBy"
-          :sortDir="sortDir"
-          @changeSort="changeSort"
-        />
-    </div>
+    <v-container class="mt-2 mx-auto">
+        <v-row>
+            <v-col cols="3">
+                <PlayLists />
+            </v-col>
+            <v-col>
+                <TableVue 
+                  :items="paginatedSongs"
+                  :columns="columns"
+                  :sortBy="sortBy"
+                  :sortDir="sortDir"
+                  @changeSort="changeSort"
+                />
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 
 <script>
 import { orderBy } from "lodash";
 import paginate from "@/utils/paginate";
 import TableVue from "@/components/table/Index.vue";
+import PlayLists from "@/components/PlayLists.vue";
 import MusicList from "@/assets/list.json";
 
 export default {
     components: {
-        TableVue
+        TableVue,
+        PlayLists,
     },
     created() {
         window.addEventListener("scroll", () => {

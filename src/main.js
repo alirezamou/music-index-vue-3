@@ -17,10 +17,17 @@ const vuetify = createVuetify({
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronUp,
+  faChevronDown,
+  faBook,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
 
 library.add(faChevronUp);
 library.add(faChevronDown);
+library.add(faBook);
+library.add(faPlus);
 
 createApp(App)
   .use(store)
