@@ -1,7 +1,8 @@
 <template>
     <v-list>
-      <p>Playlists</p>
-      <template v-for="playlist in playlists" :key="playlist.slug">
+      <p class="playlist-title">Playlists</p>
+      <p class="no-playlist" v-if="!playlists.length">You have no playlist yet.</p>
+      <template v-else v-for="playlist in playlists" :key="playlist.slug">
         <v-list-item>
           <span>
             <font-awesome-icon icon="fa-solid fa-book"></font-awesome-icon>
@@ -12,7 +13,7 @@
       <div>
         <v-form class="overflow-hidden" @submit.prevent="addPlaylist">
           <v-container class="d-flex align-center">
-                <v-text-field v-model="newPlaylist"></v-text-field>
+                <v-text-field v-model="newPlaylist" placeholder="New playlist"></v-text-field>
                 <v-btn variant="tonal" type="submit">
                   <font-awesome-icon icon="fa-solid fa-plus"></font-awesome-icon>
                   Add
@@ -31,18 +32,7 @@ export default {
   data() {
     return {
         newPlaylist: "",
-        playlists: [
-          {
-            name: "playlist 1",
-            slug: "playlist-1",
-            songs: ['song 1', 'song 2']
-          },
-          {
-            name: "playlist 2",
-            slug: "playlist-2",
-            songs: ['song 3', 'song 4']
-          }
-        ],
+        playlists: [],
     };
   },
   methods: {
@@ -63,8 +53,24 @@ export default {
 <style scoped>
   .v-btn {
     font-size: 0.7rem;
+    background-color: rgb(57, 230, 160);
+    color: #fff;
+    font-weight: bold;
   }
   .v-container {
     gap: 10px;
+  }
+  .playlist-title {
+    background-color: rgb(57, 200, 160);
+    color: #fff;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
+    margin-bottom: 10px;
+  }
+  .no-playlist {
+    margin-top: 10px;
+    padding: 0.5rem 1rem;
+    color: #555;
   }
 </style>
