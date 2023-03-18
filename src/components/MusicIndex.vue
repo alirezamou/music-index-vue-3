@@ -5,8 +5,8 @@
                 <PlayLists />
             </v-col>
             <v-col>
-                <TableVue 
-                  :items="paginatedSongs"
+                <MusicTable
+                  :songs="paginatedSongs"
                   :columns="columns"
                   :sortBy="sortBy"
                   :sortDir="sortDir"
@@ -20,13 +20,13 @@
 <script>
 import { orderBy } from "lodash";
 import paginate from "@/utils/paginate";
-import TableVue from "@/components/table/Index.vue";
 import PlayLists from "@/components/PlayLists.vue";
 import MusicList from "@/assets/list.json";
+import MusicTable from "@/components/MusicTable.vue";
 
 export default {
     components: {
-        TableVue,
+        MusicTable,
         PlayLists,
     },
     created() {
