@@ -1,14 +1,17 @@
 <template>
     <v-list>
       <p class="playlist-title">Playlists</p>
+      <router-link to="/">All songs</router-link>
       <p class="no-playlist" v-if="!playlists.length">You have no playlist yet.</p>
       <template v-else v-for="playlist in playlists" :key="playlist.slug">
-        <v-list-item>
-          <span>
-            <font-awesome-icon icon="fa-solid fa-book"></font-awesome-icon>
-          </span>
-          {{ playlist.name }}
-        </v-list-item>
+        <router-link :to="playlist.slug">
+          <v-list-item>
+            <span>
+              <font-awesome-icon icon="fa-solid fa-book"></font-awesome-icon>
+            </span>
+            {{ playlist.name }}
+          </v-list-item>
+        </router-link>
       </template>
       <div>
         <v-form @submit.prevent="addPlaylist">
@@ -25,10 +28,22 @@
 </template>
 
 <script>
+import { toRaw } from "vue"; 
+import localforage from "localforage";
 import slugify from "slugify";
 
 export default {
   name: "PlayLists",
+  created() {
+    localforage.getItem("playlists")
+    .then(playlists => {
+      if(playlists)
+        this.playlists = playlists;
+      else 
+        this.playlists = [];
+    })
+    .catch(err => console.log(err));
+  },
   data() {
     return {
         newPlaylist: "",
@@ -47,10 +62,31 @@ export default {
         this.newPlaylist = "";
     },
   },
+  watch: {
+    playlists: {
+      async handler(playlists) {
+        await localforage.setItem("playlists", toRaw(playlists));
+      },
+      deep: true,
+    },
+  },
 }
 </script>
 
 <style scoped>
+  a {
+    color: rgb(100, 160, 130);
+    text-decoration: none;
+  }
+  a::after {
+    content: "\02192";
+    color: rgb(100, 160, 130);
+    margin-left: 5px;
+    transition: margin 0.15s ease;
+  }
+  a:hover::after {
+    margin-left: 10px;
+  }
   .v-container {
     gap: 10px;
   }
