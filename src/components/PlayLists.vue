@@ -11,13 +11,13 @@
         </v-list-item>
       </template>
       <div>
-        <v-form class="overflow-hidden" @submit.prevent="addPlaylist">
-          <v-container class="d-flex align-center">
-                <v-text-field v-model="newPlaylist" placeholder="New playlist"></v-text-field>
-                <v-btn variant="tonal" type="submit">
-                  <font-awesome-icon icon="fa-solid fa-plus"></font-awesome-icon>
-                  Add
-                </v-btn>
+        <v-form @submit.prevent="addPlaylist">
+          <v-container class="d-flex">
+            <v-text-field class="mr-2" v-model="newPlaylist" placeholder="New playlist"></v-text-field>
+            <v-btn :ripple="false" variant="tonal" type="submit">
+              <font-awesome-icon icon="fa-solid fa-plus"></font-awesome-icon>
+              Add
+            </v-btn>
           </v-container>
         </v-form>
       </div>
@@ -51,14 +51,21 @@ export default {
 </script>
 
 <style scoped>
+  .v-container {
+    gap: 10px;
+  }
   .v-btn {
     font-size: 0.7rem;
     background-color: rgb(57, 230, 160);
     color: #fff;
     font-weight: bold;
+    padding: 0;
   }
-  .v-container {
-    gap: 10px;
+  .v-btn:active {
+    transform: scale(0.98);
+  }
+  .v-text-field >>> input {
+    padding: 0.5rem;
   }
   .playlist-title {
     background-color: rgb(57, 200, 160);
