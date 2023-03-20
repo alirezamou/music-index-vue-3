@@ -1,15 +1,17 @@
 <template>
     <v-list>
-      <p class="playlist-title">Playlists</p>
-      <router-link to="/">All songs</router-link>
+      <p class="playlists-heading">Playlists</p>
+      <router-link to="/" class="link-arrow">All songs</router-link>
       <p class="no-playlist" v-if="!playlists.length">You have no playlist yet.</p>
       <template v-else v-for="playlist in playlists" :key="playlist.slug">
         <router-link :to="playlist.slug">
-          <v-list-item>
-            <span>
+          <v-list-item class="playlist">
+            <span class="playlist__icon">
               <font-awesome-icon icon="fa-solid fa-book"></font-awesome-icon>
             </span>
-            {{ playlist.name }}
+            <span class="playlist__title">
+              {{ playlist.name }}
+            </span>
           </v-list-item>
         </router-link>
       </template>
@@ -78,13 +80,13 @@ export default {
     color: rgb(100, 160, 130);
     text-decoration: none;
   }
-  a::after {
+  .link-arrow::after {
     content: "\02192";
     color: rgb(100, 160, 130);
     margin-left: 5px;
     transition: margin 0.15s ease;
   }
-  a:hover::after {
+  .link-arrow:hover::after {
     margin-left: 10px;
   }
   .v-container {
@@ -103,13 +105,19 @@ export default {
   .v-text-field >>> input {
     padding: 0.5rem;
   }
-  .playlist-title {
+  .playlists-heading {
     background-color: rgb(57, 200, 160);
     color: #fff;
     font-weight: bold;
     padding: 0.5rem 1rem;
     border-radius: 2px;
     margin-bottom: 10px;
+  }
+  .playlist__icon {
+    margin-right: 0.8rem;
+  }
+  .playlist__title {
+    color: #222;
   }
   .no-playlist {
     margin-top: 10px;

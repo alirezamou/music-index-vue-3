@@ -8,6 +8,7 @@
 
 <script>
 import MusicIndex from "@/components/MusicIndex.vue";
+import "@/assets/app.css";
 
 export default {
   components: {
