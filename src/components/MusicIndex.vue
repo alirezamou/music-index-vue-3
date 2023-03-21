@@ -70,8 +70,7 @@ export default {
             setTimeout(() => {
                 target.classList.remove("flash");
             }, 1000);
-
-            this.activePlaylists.forEach(playlist => playlist.songs.push(song));
+            this.activePlaylists.forEach((playlist, index) => this.activePlaylists[index].songs.push(song));
         }
     },
     computed: {
