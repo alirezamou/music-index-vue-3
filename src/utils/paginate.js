@@ -1,5 +1,5 @@
 function paginate(items, pageSize, currentPage, isFromBegin) {
-  if (!items.length) throw new Error("items Array is empty");
+  if (!items.length) return [];
 
   const idxStart = isFromBegin ? 0 : pageSize * currentPage;
   const idxEnd = pageSize * (currentPage + 1);
