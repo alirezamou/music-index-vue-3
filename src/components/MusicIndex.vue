@@ -2,7 +2,7 @@
     <v-container class="mt-2 mx-auto">
         <v-row>
             <v-col cols="3">
-                <PlayLists />
+                <PlayLists :addingEnabled="addingEnabled" @setActivePlaylists="set_active_playlists" />
             </v-col>
             <v-col>
                 <MusicTable
@@ -44,6 +44,8 @@ export default {
             sortDir: "asc",
             pageSize: 50,
             currentPage: 0,
+            addingEnabled: false,
+            activePlaylists: [],
         };
     },
     methods: {
@@ -54,6 +56,12 @@ export default {
                 this.sortDir = "asc";
             }
             this.sortBy = column;
+        },
+        set_active_playlists(activePlaylists) {
+            this.activePlaylists = activePlaylists;
+        },
+        add_song(song) {
+            this.activePlaylists.forEach(playlist => playlist.push(song));
         }
     },
     computed: {

@@ -3,17 +3,30 @@
       <p class="playlists-heading">Playlists</p>
       <router-link to="/" class="link-arrow">All songs</router-link>
       <p class="no-playlist" v-if="!playlists.length">You have no playlist yet.</p>
-      <template v-else v-for="playlist in playlists" :key="playlist.slug">
-        <router-link :to="playlist.slug">
-          <v-list-item class="playlist">
+
+      <template v-else v-for="(playlist, index) in playlists" :key="playlist.slug">
+        <v-list-item class="playlist">
+          <router-link :to="playlist.slug">
             <span class="playlist__icon">
               <font-awesome-icon icon="fa-solid fa-book"></font-awesome-icon>
             </span>
             <span class="playlist__title">
               {{ playlist.name }}
             </span>
-          </v-list-item>
-        </router-link>
+          </router-link>
+          <template v-if="addingEnabled">
+            <div v-if="!playlist.adding" class="toggle-adding-songs">
+              <a @click="addSongs(index)" title="Add songs">
+                <font-awesome-icon icon="fa-solid fa-plus"></font-awesome-icon>
+              </a>
+            </div>
+            <div v-else class="toggle-adding-songs" >
+              <a @click="addSongs(index)" title="Disable adding songs">
+                <font-awesome-icon icon="fa-solid fa-check-square"></font-awesome-icon>
+              </a>
+            </div>
+          </template>
+        </v-list-item>
       </template>
       <div>
         <v-form @submit.prevent="addPlaylist">
@@ -45,6 +58,15 @@ export default {
         this.playlists = [];
     })
     .catch(err => console.log(err));
+
+    this.playlists.forEach(playlist => playlist.adding = false);
+  },
+  props: {
+    addingEnabled: {
+      type: Boolean,
+      default: false,
+      required: false,
+    },
   },
   data() {
     return {
@@ -59,10 +81,16 @@ export default {
         this.playlists.push({
             name: this.newPlaylist,
             slug: slugify(this.newPlaylist),
+            adding: false,
             songs: [],
         });
         this.newPlaylist = "";
     },
+    addSongs(index) {
+      this.playlists[index].adding = !this.playlists[index].adding;
+
+      this.$emit("setActivePlaylists", this.playlists.filter(playlist => playlist.adding === true));
+    }
   },
   watch: {
     playlists: {
@@ -124,4 +152,23 @@ export default {
     padding: 0.5rem 1rem;
     color: #555;
   }
+  .v-list-item >>> .v-list-item__content {
+    display: flex;
+    justify-content: space-between;
+  }
+  .toggle-adding-songs {
+    cursor: pointer;
+    background-color: #eee;
+    border-radius: 100%;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .toggle-adding-songs a {
+    width: 100%;
+    cursor: pointer;
+  }
+
 </style>

@@ -22,12 +22,14 @@ import {
   faChevronDown,
   faBook,
   faPlus,
+  faCheckSquare,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faChevronUp);
 library.add(faChevronDown);
 library.add(faBook);
 library.add(faPlus);
+library.add(faCheckSquare);
 
 createApp(App)
   .use(store)
