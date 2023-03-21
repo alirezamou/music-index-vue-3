@@ -6,7 +6,7 @@
 
       <template v-else v-for="(playlist, index) in playlists" :key="playlist.slug">
         <v-list-item class="playlist">
-          <router-link :to="playlist.slug">
+          <router-link :to="`/playlist/${playlist.slug}`">
             <span class="playlist__icon">
               <font-awesome-icon icon="fa-solid fa-book"></font-awesome-icon>
             </span>
@@ -59,12 +59,21 @@ export default {
       else 
         this.playlists = [];
     })
+    .then(() => {
+      if(this.selectedPlaylistSlug !== undefined) {
+        this.$emit("setPlaylist", this.playlists.find(playlist => playlist.slug === this.selectedPlaylistSlug));
+      }
+    })
     .catch(err => console.log(err));
   },
   props: {
     addingEnabled: {
       type: Boolean,
       default: false,
+      required: false,
+    },
+    selectedPlaylistSlug: {
+      type: String,
       required: false,
     },
   },
@@ -99,7 +108,12 @@ export default {
       },
       deep: true,
     },
-  },
+    selectedPlaylistSlug: {
+      handler(slug) {
+        this.$emit("setPlaylist", this.playlists.find(playlist => playlist.slug === slug));
+      }
+    },
+  }
 }
 </script>
 
