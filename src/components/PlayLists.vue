@@ -52,14 +52,14 @@ export default {
   created() {
     localforage.getItem("playlists")
     .then(playlists => {
-      if(playlists)
+      if(playlists) {
         this.playlists = playlists;
+        this.playlists.forEach(playlist => playlist.adding = false);
+      }
       else 
         this.playlists = [];
     })
     .catch(err => console.log(err));
-
-    this.playlists.forEach(playlist => playlist.adding = false);
   },
   props: {
     addingEnabled: {
