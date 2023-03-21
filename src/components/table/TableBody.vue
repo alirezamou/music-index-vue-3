@@ -1,7 +1,10 @@
 <template>
     <tbody>
         <tr v-for="(item, index) in items" :key="index">
-            <td v-for="(column, columnKey) in columns" :key="columnKey" v-text="item[column]"></td>
+            <td v-for="(column, columnKey) in columns" :key="columnKey">
+                <slot name="add_title" v-if="column === 'title'" :song="item"></slot>
+                {{ item[column] }}
+            </td>
         </tr>
     </tbody>
 </template>

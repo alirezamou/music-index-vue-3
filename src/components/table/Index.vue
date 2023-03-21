@@ -7,7 +7,11 @@
         :sortDir="sortDir"
         @changeSort="(column) => $emit('changeSort', column)"
     />
-    <TableBody :items="items" :columns="columns" />
+    <TableBody :items="items" :columns="columns">
+        <template #add_title="{ song }">
+            <slot name="add_title" :song="song"></slot>
+        </template>
+    </TableBody>
 </v-table>
 </template>
 

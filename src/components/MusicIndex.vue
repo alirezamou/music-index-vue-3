@@ -2,7 +2,7 @@
     <v-container class="mt-2 mx-auto">
         <v-row>
             <v-col cols="3">
-                <PlayLists :addingEnabled="addingEnabled" @setActivePlaylists="set_active_playlists" />
+                <PlayLists addingEnabled @setActivePlaylists="set_active_playlists" />
             </v-col>
             <v-col>
                 <MusicTable
@@ -11,7 +11,13 @@
                   :sortBy="sortBy"
                   :sortDir="sortDir"
                   @changeSort="changeSort"
-                />
+                >
+                  <template v-if="activePlaylists.length > 0" #add_title="{ song }">
+                    <a class="add-song-plus" @click="add_song(song, $event.target)">
+                        <font-awesome-icon icon="fa-solid fa-plus"></font-awesome-icon>
+                    </a>
+                  </template>
+                </MusicTable>
             </v-col>
         </v-row>
     </v-container>
@@ -44,7 +50,6 @@ export default {
             sortDir: "asc",
             pageSize: 50,
             currentPage: 0,
-            addingEnabled: false,
             activePlaylists: [],
         };
     },
@@ -60,8 +65,13 @@ export default {
         set_active_playlists(activePlaylists) {
             this.activePlaylists = activePlaylists;
         },
-        add_song(song) {
-            this.activePlaylists.forEach(playlist => playlist.push(song));
+        add_song(song, target) {
+            target.classList.add("flash");
+            setTimeout(() => {
+                target.classList.remove("flash");
+            }, 1000);
+
+            this.activePlaylists.forEach(playlist => playlist.songs.push(song));
         }
     },
     computed: {
@@ -87,4 +97,14 @@ export default {
 </script>
 
 <style scoped>
+  .add-song-plus {
+    cursor: pointer;
+  }
+  .flash {
+    animation: flash 1s 1 ease;
+  }
+  @keyframes flash {
+    from { color: blue; }
+    to { color: inherit; }
+  }
 </style>
