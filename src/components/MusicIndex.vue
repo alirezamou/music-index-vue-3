@@ -86,7 +86,7 @@ export default {
         }
     },
     watch: {
-        items: {
+        songs: {
             handler() {
                 this.currentPage = 0;
             }
