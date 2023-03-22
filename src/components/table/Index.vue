@@ -10,6 +10,9 @@
         <template #add_title="{ song }">
             <slot name="add_title" :song="song"></slot>
         </template>
+        <template #custom_column="{ song }">
+            <slot name="custom_column" :song="song"></slot>
+        </template>
     </TableBody>
 </v-table>
 </template>

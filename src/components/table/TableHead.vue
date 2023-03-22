@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <template v-for="(value, index) in keys" :key="index">
-                <th>
+                <th  v-if="value !== 'custom-column'">
                     <a @click="() => emitter.emit('change-sort', value)" :class="value === sortBy && 'active'">
                         {{ value }}
                         <font-awesome-icon
@@ -12,6 +12,7 @@
                         />
                     </a>
                 </th>
+                <th v-else></th>
             </template>
         </tr>
     </thead>

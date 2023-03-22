@@ -15,6 +15,11 @@
                         <font-awesome-icon icon="fa-solid fa-plus"></font-awesome-icon>
                     </a>
                   </template>
+                  <template #custom_column="{ song }">
+                    <a @click="delete_song(song)">
+                        <font-awesome-icon icon="fa-solid fa-trash"></font-awesome-icon>
+                    </a>
+                  </template>
                 </MusicTable>
             </v-col>
         </v-row>

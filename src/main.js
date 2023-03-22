@@ -23,6 +23,7 @@ import {
   faBook,
   faPlus,
   faCheckSquare,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faChevronUp);
@@ -30,6 +31,7 @@ library.add(faChevronDown);
 library.add(faBook);
 library.add(faPlus);
 library.add(faCheckSquare);
+library.add(faTrash);
 
 import mitt from "mitt";
 
