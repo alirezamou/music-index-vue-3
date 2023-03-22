@@ -3,7 +3,7 @@
         <tr v-for="(item, index) in items" :key="index">
             <td v-for="(column, columnKey) in columns" :key="columnKey">
                 <slot name="add_title" v-if="column === 'title'" :song="item"></slot>
-                <slot name="custom_column" v-if="column === 'custom-column'" :song="item">fallback content</slot>
+                <slot name="custom_column" v-if="column === 'custom-column'" :song="item"></slot>
                 {{ item[column] }}
             </td>
         </tr>

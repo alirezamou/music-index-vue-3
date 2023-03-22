@@ -9,7 +9,13 @@
                   :songs="paginatedSongs"
                   :sortBy="sortBy"
                   :sortDir="sortDir"
-                />
+                >
+                <template #custom_column="{ song }">
+                    <a class="delete-button" @click="delete_song(song)">
+                        <font-awesome-icon icon="fa-solid fa-trash"></font-awesome-icon>
+                    </a>
+                  </template>
+                </MusicTable>
             </v-col>
         </v-row>
     </v-container>
@@ -60,11 +66,9 @@ export default {
             this.selectedPlaylist = playlist;
             this.songs = playlist.songs;
         },
-        // beforeRouteUpdate(to, from, next) {
-        //     this.selectedPlaylistSlug = to.params.slug;
-
-        //     next();
-        // }
+        delete_song(song) {
+            this.selectedPlaylist.songs.splice(this.selectedPlaylist.songs.indexOf(song), 1);
+        }
     },
     computed: {
         sortedSongs() {
@@ -94,4 +98,23 @@ export default {
 </script>
 
 <style scoped>
+
+.delete-button {
+    cursor: pointer;
+    color: red;
+    background-color: #eee;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    border-radius: 50%;
+}
+
+.delete-button svg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
 </style>
