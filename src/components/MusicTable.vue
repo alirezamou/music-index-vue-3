@@ -14,6 +14,8 @@
 <script>
 import TableVue from "@/components/table/Index.vue";
 
+const COLUMNS = ["artist", "title", "genre", "album"];
+
 export default {  
     name: "MusicTable",
     components: {
@@ -25,11 +27,6 @@ export default {
             default: () => [],
             required: true,
         },
-        columns: {
-            typs: Array,
-            default: () => [],
-            required: true,
-        },
         sortBy: {
             type: String,
             default: () => "",
@@ -37,6 +34,11 @@ export default {
         sortDir: {
             type: String,
             default: () => "asc",
+        },
+    },
+    computed: {
+        columns() {
+            return COLUMNS;
         }
     }
 }

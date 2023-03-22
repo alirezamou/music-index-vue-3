@@ -7,7 +7,6 @@
             <v-col>
                 <MusicTable
                   :songs="paginatedSongs"
-                  :columns="columns"
                   :sortBy="sortBy"
                   :sortDir="sortDir"
                 />
@@ -42,7 +41,6 @@ export default {
             selectedPlaylist: {},
             selectedPlaylistSlug: this.$route.params.slug,
             songs: [],
-            columns: ["artist", "title", "genre", "album"],
             sortBy: "",
             sortDir: "asc",
             pageSize: 50,

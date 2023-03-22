@@ -7,10 +7,8 @@
             <v-col>
                 <MusicTable
                   :songs="paginatedSongs"
-                  :columns="columns"
                   :sortBy="sortBy"
                   :sortDir="sortDir"
-                  @changeSort="changeSort"
                 >
                   <template v-if="activePlaylists.length > 0" #add_title="{ song }">
                     <a class="add-song-plus" @click="add_song(song, $event.target)">
@@ -48,7 +46,6 @@ export default {
     data() {
         return {
             songs: MusicList,
-            columns: ["artist", "title", "genre", "album"],
             sortBy: "",
             sortDir: "asc",
             pageSize: 50,
