@@ -42,6 +42,9 @@ export default {
                 this.currentPage++;
         })
     },
+    mounted() {
+        this.emitter.on("change-sort", this.changeSort);
+    },
     data() {
         return {
             songs: MusicList,

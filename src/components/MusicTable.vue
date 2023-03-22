@@ -4,7 +4,6 @@
         :columns="columns"
         :sortBy="sortBy"
         :sortDir="sortDir"
-        @changeSort="(column) => $emit('changeSort', column)"
     >
       <template #add_title="{ song }">
         <slot name="add_title" :song="song"></slot>

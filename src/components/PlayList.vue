@@ -10,7 +10,6 @@
                   :columns="columns"
                   :sortBy="sortBy"
                   :sortDir="sortDir"
-                  @changeSort="changeSort"
                 />
             </v-col>
         </v-row>
@@ -34,6 +33,9 @@ export default {
             if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 100)
                 this.currentPage++;
         });
+    },
+    mounted() {
+        this.emitter.on("change-sort", this.changeSort);
     },
     data() {
         return {

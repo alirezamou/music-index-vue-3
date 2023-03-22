@@ -3,7 +3,7 @@
         <tr>
             <template v-for="(value, index) in keys" :key="index">
                 <th>
-                    <a @click="() => $emit('changeSort', value)" :class="value === sortBy && 'active'">
+                    <a @click="() => emitter.emit('change-sort', value)" :class="value === sortBy && 'active'">
                         {{ value }}
                         <font-awesome-icon
                           v-if="value === sortBy"

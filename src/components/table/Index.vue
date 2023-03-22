@@ -5,7 +5,6 @@
         :keys="columns" 
         :sortBy="sortBy" 
         :sortDir="sortDir"
-        @changeSort="(column) => $emit('changeSort', column)"
     />
     <TableBody :items="items" :columns="columns">
         <template #add_title="{ song }">

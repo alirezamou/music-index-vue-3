@@ -31,7 +31,12 @@ library.add(faBook);
 library.add(faPlus);
 library.add(faCheckSquare);
 
-createApp(App)
+import mitt from "mitt";
+
+const app = createApp(App);
+app.config.globalProperties.emitter = mitt();
+
+app
   .use(store)
   .use(router)
   .use(vuetify)
